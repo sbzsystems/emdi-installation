@@ -2,10 +2,8 @@
 
 
 [Setup]
-AppCopyright=SBZ systems ©2003-{#Year}
-; The following AppId line will uniquely identify this program.
-; Don't use the same AppId value in more than one setup package.
-AppId={{%AppId}}
+AppCopyright=SBZ systems ©2003-2025
+AppId={{C14C9D18-D0B8-40F8-B47B-0F0C6AFD4A4A}
 AppName={cm:MyAppName}
 DisableDirPage=no
 AppVersion={#ApplicationVersion}

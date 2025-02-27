@@ -1,7 +1,4 @@
-﻿#define ApplicationVersion GetFileVersion('epiloges.exe')
-
-
- 
+﻿```ini
 ;*** Merged Inno Setup Script ***
 
 [Setup]
@@ -28,7 +25,7 @@ InfoBeforeFile=
 VersionInfoCompany=SBZ systems
 VersionInfoDescription={cm:VersionInfoDescription}
 VersionInfoCopyright=SBZ systems
-VersionInfoProductName={cm:VersionInfoProductName}
+VersionInfoProductName={cm:ProductName}
 SetupIconFile=images\desktop-icon.ico
 AppSupportPhone=+30 2118002930, +44 (0) 2037347158
 VersionInfoVersion={#ApplicationVersion}
@@ -58,12 +55,22 @@ Name: "English"; MessagesFile: "compiler:Default.isl"; LicenseFile: "LICENCE-Eng
 ;*** Common Messages ***
 Greek.MyAppName=EMDI - {cm:BusinessManagementType}
 English.MyAppName=EMDI - {cm:BusinessManagementType}
-Greek.NewerVersionExists=Προσοχή!%n%nΒεβαιώσου πρώτα ότι δικαιούσαι αναβάθμιση (είναι δωρεάν μόνο για το 1ο έτος).%nΣε διαφορετική περίπτωση το πρόγραμμα θα κλειδωθεί!%nΚαλέστε μας τώρα +44 (0) 2037347158 για να σας βοηθήσουμε.
-English.NewerVersionExists=Warning!%n%nFirst make sure that you are qualified to upgrade (it is only free for the first year).%nOtherwise the program will be locked!%nCall us now +44 (0) 2037347158 to assist you.
+Greek.NewerVersionExists=Προσοχή!%n%nΒεβαιώσου πρώτα ότι δικαιούσαι αναβάθμιση (είναι δωρεάν μόνο για το 1ο έτος).%nΣε διαφο[...]
+English.NewerVersionExists=Warning!%n%nFirst make sure that you are qualified to upgrade (it is only free for the first year).%nOtherwise the program will be locked!%nCall us now +44 (0) 2037347158 to[...]
 English.printbutton=Print agreement
 Greek.printbutton=Εκτύπωση άδειας
 English.licencefile=LICENCE-English.TXT
 Greek.licencefile=LICENCE-Greek.TXT
+
+;*** Installation Type Messages ***
+Greek.InstallType=Επιλέξτε Τύπο Εγκατάστασης:
+English.InstallType=Select Installation Type:
+Greek.Business=Επιχείρηση
+English.Business=Business
+Greek.Retail=Λιανική
+English.Retail=Retail
+Greek.Restaurant=Εστιατόριο
+English.Restaurant=Restaurant
 
 ;*** EMDI Specific Messages ***
 Greek.BusinessManagementType=Εμπορική διαχείριση
@@ -74,12 +81,12 @@ Greek.DefaultGroupName=
 English.DefaultGroupName=
 Greek.VersionInfoDescription=EMDI
 English.VersionInfoDescription=EMDI
-Greek.VersionInfoProductName=EMDI
-English.VersionInfoProductName=EMDI
 Greek.OutputBaseFilename=emdi
 English.OutputBaseFilename=emdi
 Greek.AppID={34DA3E25-64A3-4BD2-96DF-E9A0F0AE2DE1}
 English.AppID={34DA3E25-64A3-4BD2-96DF-E9A0F0AE2DE1}
+Greek.ProductName=EMDI Business
+English.ProductName=EMDI Business
 
 ;*** EMDI Retail POS Specific Messages ***
 Greek.RetailPOSName=Retail POS
@@ -90,37 +97,59 @@ Greek.RetailGroupName=Retail POS
 English.RetailGroupName=Retail POS
 Greek.RetailVersionInfoDescription=EMDI Retail POS
 English.RetailVersionInfoDescription=EMDI Retail POS
-Greek.RetailVersionInfoProductName=EMDI Retail POS
-English.RetailVersionInfoProductName=EMDI Retail POS
 Greek.RetailOutputBaseFilename=emdi_retail_pos
 English.RetailOutputBaseFilename=emdi_retail_pos
 Greek.RetailAppID={8B106595-ECDA-453B-96DE-382BFA6599F1}
 English.RetailAppID={8B106595-ECDA-453B-96DE-382BFA6599F1}
+Greek.RestaurantName=Restaurant
+English.RestaurantName=Restaurant
+
+;*** EMDI Restaurant Specific Messages ***
+Greek.RestaurantDirName=EMDI Restaurant
+English.RestaurantDirName=EMDI Restaurant
+Greek.RestaurantGroupName=Restaurant
+English.RestaurantGroupName=Restaurant
+Greek.RestaurantVersionInfoDescription=EMDI Restaurant
+English.RestaurantVersionInfoDescription=EMDI Restaurant
+Greek.RestaurantOutputBaseFilename=emdi_restaurant
+English.RestaurantOutputBaseFilename=emdi_restaurant
+Greek.RestaurantAppID={3BD2F47C-A647-421C-AA6B-8CFEC0813139}
+English.RestaurantAppID={3BD2F47C-A647-421C-AA6B-8CFEC0813139}
 
 [Tasks]
 ;*** Installation Type Selection ***
-Name: InstallEMDI; Description: Install EMDI Business Management; GroupDescription: Installation Type; Flags: exclusive unchecked
-Name: InstallRetailPOS; Description: Install EMDI Retail POS; GroupDescription: Installation Type; Flags: exclusive unchecked
+Name: InstallBusiness; Description: {cm:Business} {cm:BusinessManagementType}; GroupDescription: {cm:InstallType}; Flags: exclusive unchecked
+Name: InstallRetail; Description: {cm:Retail} {cm:RetailPOSName}; GroupDescription: {cm:InstallType}; Flags: exclusive unchecked
+Name: InstallRestaurant; Description: {cm:Restaurant} {cm:RestaurantName}; GroupDescription: {cm:InstallType}; Flags: exclusive unchecked
 
 ;*** Common Tasks ***
 Name: sync; Description: {cm:SyncDatabases}; Flags: unchecked
-Name: stock; Description: {cm:MobileInventoryManagement}; Flags: unchecked
-Name: display; Description: {cm:CustomerDisplay}; Flags: unchecked
-Name: spos; Description: {cm:RS232DeviceConnector}; Flags: unchecked
+Name: stock; Description: {cm:MobileInventoryManagement}; Flags: unchecked;  Group: OptionalTasks;
+Name: display; Description: {cm:CustomerDisplay}; Flags: unchecked; Group: OptionalTasks;
+Name: spos; Description: {cm:RS232DeviceConnector}; Flags: unchecked; Group: OptionalTasks;
 
 ;*** EMDI Specific Tasks ***
-Name: gas; Description: {cm:FuelInflowsOutflowsConnection}; Flags: unchecked; Group: EMDI_Tasks;
-Name: sqlserver; Description: {cm:EshopSQLServerConnection}; Flags: unchecked; Group: EMDI_Tasks;
-Name: eshop; Description: {cm:EshopBridgeConnection}; Flags: unchecked; Group: EMDI_Tasks;
-Name: Embedded_database; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Group: DB;
-Name: normal_database; Description: {cm:Normal}; GroupDescription:  {cm:Database}; Flags: exclusive unchecked; Group: DB;
+Name: gas; Description: {cm:FuelInflowsOutflowsConnection}; Flags: unchecked; Group: EMDI_Tasks; OnlyBelowVersion: 6.0; Group: OptionalTasks;
+Name: sqlserver; Description: {cm:EshopSQLServerConnection}; Flags: unchecked; Group: EMDI_Tasks; OnlyBelowVersion: 6.0; Group: OptionalTasks;
+Name: eshop; Description: {cm:EshopBridgeConnection}; Flags: unchecked; Group: EMDI_Tasks; OnlyBelowVersion: 6.0; Group: OptionalTasks;
+Name: Embedded_database; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Group: DB; OnlyBelowVersion: 6.0;
+Name: normal_database; Description: {cm:Normal}; GroupDescription: {cm:Database}; Flags: exclusive unchecked; Group: DB; OnlyBelowVersion: 6.0;
 
 ;*** EMDI Retail POS Specific Tasks ***
-Name: tcpsync; Description: {cm:CommunicationMaintenance}; Flags: unchecked; Group: Retail_Tasks;
-Name: Embedded_database_Retail; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Group: DB_Retail;
-Name: normal_database_Retail; Description: {cm:Normal}; GroupDescription:  {cm:Database}; Flags: exclusive unchecked; Group: DB_Retail;
+Name: tcpsync; Description: {cm:CommunicationMaintenance}; Flags: unchecked; Group: Retail_Tasks; OnlyBelowVersion: 6.0; Group: OptionalTasks;
+Name: Embedded_database_Retail; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Group: DB_Retail; OnlyBelowVersion: 6.0;
+Name: normal_database_Retail; Description: {cm:Normal}; GroupDescription: {cm:Database}; Flags: exclusive unchecked; Group: DB_Retail; OnlyBelowVersion: 6.0;
+
+;*** EMDI Restaurant Specific Tasks ***
+Name: efood; Description: {cm:DeliveryServiceConnection}; Flags: unchecked; Group: Restaurant_Tasks; OnlyBelowVersion: 6.0; Group: OptionalTasks;
+Name: Embedded_database_Restaurant; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Group: DB_Restaurant; OnlyBelowVersion: 6.0;
+Name: normal_database_Restaurant; Description: {cm:Normal}; GroupDescription: {cm:Database}; Flags: exclusive unchecked; Group: DB_Restaurant; OnlyBelowVersion: 6.0;
 
 [CustomMessages]
+;*** Task Name Messages ***
+Greek.OptionalTasks=Επιπλέον Λειτουργίες
+English.OptionalTasks=Optional Features
+
 ;*** Common Task Messages ***
 Greek.SyncDatabases=Συγχρονισμός βάσεων
 English.SyncDatabases=Sync databases
@@ -149,6 +178,10 @@ English.EshopBridgeConnection=Eshop connection with bridge
 Greek.CommunicationMaintenance=Επικοινωνία/Συντήρηση
 English.CommunicationMaintenance=Communication/Maintenance
 
+;*** EMDI Restaurant Specific Task Messages ***
+Greek.DeliveryServiceConnection=Σύνδεση με υπηρεσία delivery
+English.DeliveryServiceConnection=Delivery service connection
+
 [Files]
 ;*** Common Files ***
 Source: "epiloges.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -157,8 +190,8 @@ Source: "ryumiseis.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "accounts.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "pelatologio.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "pvlhseis.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "import.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "tcpdevices.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "import.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "sync.exe"; DestDir: "{app}"; Flags: ignoreversion; Tasks: sync
 Source: "courier.ini"; DestDir: "{app}"; Flags: onlyifdoesntexist
 Source: "..\spos\spos.exe"; DestDir: "{app}"; DestName: "spos.exe"; Flags: ignoreversion; Tasks: spos
@@ -192,7 +225,7 @@ Source: "images\emdi-30days_en.png"; DestDir: "{app}\images\"; Flags: ignorevers
 Source: "images\none.png"; DestDir: "{app}\images\"; Flags: ignoreversion
 Source: "images\shifts_bg.jpg"; DestDir: "{app}\images\"; Flags: onlyifdoesntexist
 Source: "audio\ok.wav"; DestDir: "{app}\audio\"; Flags: ignoreversion
-Source: "..\..\Users\Solon\Downloads\Firebird.exe"; DestDir: "{%TEMP}"; Flags: deleteafterinstall; Tasks: normal_database,normal_database_Retail
+Source: "..\..\Users\Solon\Downloads\Firebird.exe"; DestDir: "{%TEMP}"; Flags: deleteafterinstall; Tasks: normal_database,normal_database_Retail,normal_database_Restaurant
 Source: "forms\templates\Φόρμα A4 - Κάθετη - 4.html"; DestDir: "{app}\forms\templates\"; Flags: ignoreversion; Languages: Greek
 Source: "forms\templates\Φόρμα A4 - Κάθετη - 5.html"; DestDir: "{app}\forms\templates\"; Flags: ignoreversion; Languages: Greek
 Source: "forms\templates\Φόρμα A4 - Κάθετη με φωτογραφίες - 6.html"; DestDir: "{app}\forms\templates\"; Flags: ignoreversion; Languages: Greek
@@ -322,7 +355,6 @@ Source: "reports\18.Loyalties επιλεγμένου πελάτη.sql"; DestDir:
 Source: "reports\19.Βάρδιες.sql"; DestDir: "{app}\reports\"; Flags: ignoreversion; Languages: Greek
 Source: "reports\21.Χιλιόμετρα-Εργασίες.sql"; DestDir: "{app}\reports\"; Flags: ignoreversion; Languages: Greek
 Source: "reports\21.Οχήματα πελατών.sql"; DestDir: "{app}\reports\"; Flags: ignoreversion; Languages: Greek
-Source: "reports\20.Είσοδος - Έξοδος.sql"; DestDir: "{app}\reports\"; Flags: ignoreversion; Languages: Greek
 Source: "reports\22.Σύνδεση παρτίδων.sql"; DestDir: "{app}\reports\"; Flags: ignoreversion; Languages: Greek
 Source: "reports\24.Συγκεντρωτική τιμολογίων.sql"; DestDir: "{app}\reports\"; Flags: ignoreversion; Languages: Greek
 Source: "reports\25.Παραγγελίες σε προμηθευτές.sql"; DestDir: "{app}\reports\"; Flags: ignoreversion; Languages: Greek
@@ -363,10 +395,7 @@ Source: "reports\16.Lots.sql"; DestDir: "{app}\reports\"; Flags: ignoreversion; 
 Source: "reports\18.Loyalties per customer.sql"; DestDir: "{app}\reports\"; Flags: ignoreversion; Languages: English
 Source: "reports\18.Loyalties selected customer.sql"; DestDir: "{app}\reports\"; Flags: ignoreversion; Languages: English
 Source: "reports\19.Shifts.sql"; DestDir: "{app}\reports\"; Flags: ignoreversion; Languages: English
-Source: "reports\21.Customer vehicles.sql"; DestDir: "{app}\reports\"; Flags: ignoreversion; Languages: English
-Source: "reports\22.Lot connection.sql"; DestDir: "{app}\reports\"; Flags: ignoreversion; Languages: English
-Source: "reports\24.Aggregated document list.sql"; DestDir: "{app}\reports\"; Flags: ignoreversion; Languages: English
-Source: "reports\26.Card transactions.sql"; DestDir: "{app}\reports\"; Flags: ignoreversion; Languages: English
+
 Source: "forms\forma_en.htm"; DestDir: "{app}\forms\"; DestName: "forma.htm"; Flags: onlyifdoesntexist; Languages: English
 Source: "forms\forma_el.htm"; DestDir: "{app}\forms\"; DestName: "forma.htm"; Flags: onlyifdoesntexist; Languages: Greek
 Source: "forms\form_fislink.1"; DestDir: "{app}\forms\"; Flags: onlyifdoesntexist
@@ -394,7 +423,6 @@ Source: "language\en\import.lng"; DestDir: "{app}\language\en"; Flags: ignorever
 Source: "language\en\epiloges.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion
 Source: "language\en\apouhkh.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion
 Source: "language\en\accounts.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion
-Source: "language\en\hotel.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion
 Source: "language\en\customer_display.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion
 Source: "language\lookupvalues_el.xml"; DestDir: "{app}\language"; Flags: ignoreversion
 Source: "language\lookupvalues_en.xml"; DestDir: "{app}\language"; Flags: ignoreversion
@@ -424,14 +452,7 @@ Source: "language\mydata\tax_docs_en.txt"; DestDir: "{app}\language\mydata"; Fla
 Source: "language\mydata\tax_docs_el.txt"; DestDir: "{app}\language\mydata"; Flags: ignoreversion
 Source: "language\mydata\tax_category_en.txt"; DestDir: "{app}\language\mydata"; Flags: ignoreversion
 Source: "language\mydata\tax_category_el.txt"; DestDir: "{app}\language\mydata"; Flags: ignoreversion
-Source: "language\mydata\contracting_entities_el.csv"; DestDir: "{app}\language\mydata"; Flags: ignoreversion
-Source: "language\mydata\cpv_codes_el.csv"; DestDir: "{app}\language\mydata"; Flags: ignoreversion
-Source: "language\mydata\taric_codes_el.csv"; DestDir: "{app}\language\mydata"; Flags: ignoreversion
-Source: "language\mydata\contracting_entities_en.csv"; DestDir: "{app}\language\mydata"; Flags: ignoreversion
-Source: "language\mydata\cpv_codes_en.csv"; DestDir: "{app}\language\mydata"; Flags: ignoreversion
-Source: "language\mydata\taric_codes_en.csv"; DestDir: "{app}\language\mydata"; Flags: ignoreversion
-Source: "language\mydata\results_en.txt"; DestDir: "{app}\language\mydata"; Flags: ignoreversion
-Source: "language\mydata\results_el.txt"; DestDir: "{app}\language\mydata"; Flags: ignoreversion
+
 Source: "{app}\language\search.txt"; DestDir: "{app}\language"; DestName: "search.txt.old"; Flags: external skipifsourcedoesntexist
 Source: "language\search_el.txt"; DestDir: "{app}\language"; Languages: Greek
 Source: "language\search_en.txt"; DestDir: "{app}\language"; Languages: English
@@ -443,87 +464,88 @@ Source: "LICENCE-English.TXT"; DestDir: "{app}"; Flags: ignoreversion
 Source: "LICENCE-Greek.TXT"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Windows\Fonts\arial.ttf"; DestDir: "{fonts}"; Flags: onlyifdoesntexist uninsneveruninstall; FontInstall: "Arial"
 Source: "C:\Windows\Fonts\arialbd.ttf"; DestDir: "{fonts}"; Flags: onlyifdoesntexist uninsneveruninstall; FontInstall: "Arial Έντονα"
-Source: "C:\Program Files (x86)\Firebird\Firebird_3_0\intl\fbintl.dll"; DestDir: "{app}\intl\"; Flags: ignoreversion; Tasks: Embedded_database,Embedded_database_Retail
-Source: "C:\Program Files (x86)\Firebird\Firebird_3_0\intl\fbintl.conf"; DestDir: "{app}\intl\"; Flags: ignoreversion; Tasks: Embedded_database,Embedded_database_Retail
-Source: "C:\Program Files (x86)\Firebird\Firebird_3_0\plugins\engine12.dll"; DestDir: "{app}\plugins\"; Flags: ignoreversion; Tasks: Embedded_database,Embedded_database_Retail
-Source: "C:\Program Files (x86)\Firebird\Firebird_3_0\ib_util.dll"; DestDir: "{app}"; Flags: ignoreversion; Tasks: Embedded_database,Embedded_database_Retail
-Source: "C:\Program Files (x86)\Firebird\Firebird_3_0\fbclient.dll"; DestDir: "{app}"; Flags: ignoreversion; Tasks: Embedded_database,Embedded_database_Retail
-Source: "C:\Program Files (x86)\Firebird\Firebird_3_0\msvcr100.dll"; DestDir: "{app}"; Flags: ignoreversion; Tasks: Embedded_database,Embedded_database_Retail
-Source: "C:\Program Files (x86)\Firebird\Firebird_3_0\icudt52l.dat"; DestDir: "{app}"; Flags: ignoreversion; Tasks: Embedded_database,Embedded_database_Retail
-Source: "C:\Program Files (x86)\Firebird\Firebird_3_0\icudt52.dll"; DestDir: "{app}"; Flags: ignoreversion; Tasks: Embedded_database,Embedded_database_Retail
-Source: "C:\Program Files (x86)\Firebird\Firebird_3_0\icuin52.dll"; DestDir: "{app}"; Flags: ignoreversion; Tasks: Embedded_database,Embedded_database_Retail
-Source: "C:\Program Files (x86)\Firebird\Firebird_3_0\icuuc52.dll"; DestDir: "{app}"; Flags: ignoreversion; Tasks: Embedded_database,Embedded_database_Retail
-Source: "C:\Program Files (x86)\Firebird\Firebird_3_0\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion; Tasks: embedded_database,embedded_database_Retail
-Source: "C:\Program Files (x86)\Firebird\Firebird_3_0\gfix.exe"; DestDir: "{app}"; Flags: ignoreversion; Tasks: embedded_database,embedded_database_Retail
-Source: "C:\Program Files (x86)\Firebird\Firebird_3_0\gbak.exe"; DestDir: "{app}"; Flags: ignoreversion; Tasks: embedded_database,embedded_database_Retail
-Source: "view\firebird.conf"; DestDir: "{app}"; Flags: ignoreversion; Tasks: embedded_database,embedded_database_Retail
-Source: "images\Light.vsf"; DestDir: "{app}\images\"; Flags: ignoreversion
-Source: "images\Dark.vsf"; DestDir: "{app}\images\"; Flags: ignoreversion
-Source: "images\Grey.vsf"; DestDir: "{app}\images\"; Flags: ignoreversion
-Source: "images\Ice.vsf"; DestDir: "{app}\images\"; Flags: ignoreversion
-Source: "images\Darker.vsf"; DestDir: "{app}\images\"; Flags: ignoreversion
-Source: "images\Silver.vsf"; DestDir: "{app}\images\"; Flags: ignoreversion
-Source: "images\Sky.vsf"; DestDir: "{app}\images\"; Flags: ignoreversion
-Source: "images\Midnight dark.vsf"; DestDir: "{app}\images\"; Flags: ignoreversion
-Source: "images\Sweet grey.vsf"; DestDir: "{app}\images\"; Flags: ignoreversion
 
-;*** EMDI Specific Files ***
-Source: "view\pos0.tmp"; DestDir: "{%TEMP}"; Flags: ignoreversion; Check: MyProgCheck; Tasks: InstallEMDI
-Source: "dbs\MAIN.FDB"; DestDir: "{app}\dbs"; DestName: "main.fdb"; Flags: onlyifdoesntexist; Languages: Greek; Tasks: InstallEMDI
-Source: "dbs\MAINen.FDB"; DestDir: "{app}\dbs"; DestName: "main.fdb"; Flags: onlyifdoesntexist; Languages: English; Tasks: InstallEMDI
-Source: "mobile\emdi_stock\templates\template.htm"; DestDir: "{app}\emdi_stock\templates"; Tasks: stock,InstallEMDI
-Source: "mobile\emdi_stock\wwwroot\images\background.jpg"; DestDir: "{app}\emdi_stock\wwwroot\images"; Tasks: stock,InstallEMDI
-Source: "mobile\emdi_stock\wwwroot\css\template.css"; DestDir: "{app}\emdi_stock\wwwroot\css"; Tasks: stock,InstallEMDI
-Source: "mobile\emdi_stock\wwwroot\favicon.ico"; DestDir: "{app}\emdi_stock\wwwroot"; Flags: ignoreversion; Tasks: stock,InstallEMDI
-Source: "mobile\emdi_stock\emdi_stock.exe"; DestDir: "{app}\emdi_stock"; Flags: ignoreversion; Tasks: stock,InstallEMDI
-Source: "language\en\eshopconnector.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion; Tasks: InstallEMDI
-Source: "language\en\bldrconnector.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion; Tasks: InstallEMDI
-Source: "language\en\gasconnector.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion; Tasks: gas,InstallEMDI
-Source: "language\en\eshopconnector.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion; Tasks: eshop,InstallEMDI
-Source: "language\en\emdi_stock.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion; Tasks: stock,InstallEMDI
-Source: "gasconnector.exe"; DestDir: "{app}"; Flags: ignoreversion; Tasks: gas,InstallEMDI
-Source: "bldrconnector.exe"; DestDir: "{app}"; Flags: ignoreversion; Tasks: sqlserver,InstallEMDI
-Source: "eshopconnector.exe"; DestDir: "{app}"; Flags: ignoreversion; Tasks: eshop,InstallEMDI
+;*** EMDI Business Specific Files ***
+Source: "view\pos0.tmp"; DestDir: "{%TEMP}"; Flags: ignoreversion; Check: MyProgCheck; Tasks: InstallBusiness
+Source: "dbs\MAIN.FDB"; DestDir: "{app}\dbs"; DestName: "main.fdb"; Flags: onlyifdoesntexist; Languages: Greek; Tasks: InstallBusiness
+Source: "dbs\MAINen.FDB"; DestDir: "{app}\dbs"; DestName: "main.fdb"; Flags: onlyifdoesntexist; Languages: English; Tasks: InstallBusiness
+Source: "mobile\emdi_stock\templates\template.htm"; DestDir: "{app}\emdi_stock\templates"; Tasks: stock,InstallBusiness
+Source: "mobile\emdi_stock\wwwroot\images\background.jpg"; DestDir: "{app}\emdi_stock\wwwroot\images"; Tasks: stock,InstallBusiness
+Source: "mobile\emdi_stock\wwwroot\css\template.css"; DestDir: "{app}\emdi_stock\wwwroot\css"; Tasks: stock,InstallBusiness
+Source: "mobile\emdi_stock\wwwroot\favicon.ico"; DestDir: "{app}\emdi_stock\wwwroot"; Flags: ignoreversion; Tasks: stock,InstallBusiness
+Source: "mobile\emdi_stock\emdi_stock.exe"; DestDir: "{app}\emdi_stock"; Flags: ignoreversion; Tasks: stock,InstallBusiness
+Source: "language\en\eshopconnector.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion; Tasks: InstallBusiness
+Source: "language\en\bldrconnector.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion; Tasks: InstallBusiness
+Source: "language\en\gasconnector.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion; Tasks: gas,InstallBusiness
+Source: "language\en\eshopconnector.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion; Tasks: eshop,InstallBusiness
+Source: "language\en\emdi_stock.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion; Tasks: stock,InstallBusiness
+Source: "gasconnector.exe"; DestDir: "{app}"; Flags: ignoreversion; Tasks: gas,InstallBusiness
+Source: "bldrconnector.exe"; DestDir: "{app}"; Flags: ignoreversion; Tasks: sqlserver,InstallBusiness
+Source: "eshopconnector.exe"; DestDir: "{app}"; Flags: ignoreversion; Tasks: eshop,InstallBusiness
 
 ;*** EMDI Retail POS Specific Files ***
-Source: "view\pos1.tmp"; DestDir: "{%TEMP}"; Flags: ignoreversion; Check: MyProgCheck; Tasks: InstallRetailPOS
-Source: "dbs\MAINSM.FDB"; DestDir: "{app}\dbs"; DestName: "main.fdb"; Flags: onlyifdoesntexist; Languages: Greek; Tasks: InstallRetailPOS
-Source: "dbs\MAINSMen.FDB"; DestDir: "{app}\dbs"; DestName: "main.fdb"; Flags: onlyifdoesntexist; Languages: English; Tasks: InstallRetailPOS
-Source: "forms\list_.txt"; DestDir: "{app}"; Flags: onlyifdoesntexist; Tasks: InstallRetailPOS
-Source: "language\en\hotel.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion; Tasks: InstallRetailPOS
+Source: "view\pos1.tmp"; DestDir: "{%TEMP}"; Flags: ignoreversion; Check: MyProgCheck; Tasks: InstallRetail
+Source: "dbs\MAINSM.FDB"; DestDir: "{app}\dbs"; DestName: "main.fdb"; Flags: onlyifdoesntexist; Languages: Greek; Tasks: InstallRetail
+Source: "dbs\MAINSMen.FDB"; DestDir: "{app}\dbs"; DestName: "main.fdb"; Flags: onlyifdoesntexist; Languages: English; Tasks: InstallRetail
+Source: "forms\list_.txt"; DestDir: "{app}"; Flags: onlyifdoesntexist; Tasks: InstallRetail
+Source: "language\en\hotel.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion; Tasks: InstallRetail
 
+;*** EMDI Restaurant Specific Files ***
+Source: "view\pos2.tmp"; DestDir: "{%TEMP}"; Flags: ignoreversion; Check: MyProgCheck; Tasks: InstallRestaurant
+Source: "dbs\MAINREST.FDB"; DestDir: "{app}\dbs"; DestName: "main.fdb"; Flags: onlyifdoesntexist; Languages: Greek; Tasks: InstallRestaurant
+Source: "dbs\MAINRESTen.FDB"; DestDir: "{app}\dbs"; DestName: "main.fdb"; Flags: onlyifdoesntexist; Languages: English; Tasks: InstallRestaurant
+Source: "forms\list_.txt"; DestDir: "{app}"; Flags: onlyifdoesntexist; Tasks: InstallRestaurant
+Source: "language\en\hotel.lng"; DestDir: "{app}\language\en"; Flags: ignoreversion; Tasks: InstallRestaurant
+Source: "paraggelies.exe"; DestDir: "{app}"; Flags: ignoreversion; Tasks: InstallRestaurant
+Source: "efoodconnector.exe"; DestDir: "{app}"; Flags: ignoreversion; Tasks: efood, InstallRestaurant
+Source: "dbs\CONNECTOR.FDB"; DestDir: "{app}\dbs"; Flags: ignoreversion; Tasks: efood, InstallRestaurant
+Source: "view\settings.ini"; DestDir: "{app}"; DestName: "settings.ini"; Flags: onlyifdoesntexist; Tasks: InstallRestaurant
 [Icons]
 ;*** Common Icons ***
-Name: "{userdesktop}\EMDI {cm:RetailPOSName}"; Filename: "{app}\epiloges.exe"; WorkingDir: "{app}"; IconFilename: "{app}\images\desktop-main-icon.ico"; IconIndex: 0
+Name: "{userdesktop}\EMDI {cm:RetailPOSName}"; Filename: "{app}\epiloges.exe"; WorkingDir: "{app}"; IconFilename: "{app}\images\desktop-main-icon.ico"; IconIndex: 0; Tasks: InstallRetail
+Name: "{userdesktop}\EMDI {cm:RestaurantName}"; Filename: "{app}\epiloges.exe"; WorkingDir: "{app}"; IconFilename: "{app}\images\desktop-main-icon.ico"; IconIndex: 0; Tasks: InstallRestaurant
+Name: "{userdesktop}\EMDI {cm:BusinessManagementType}"; Filename: "{app}\epiloges.exe"; WorkingDir: "{app}"; IconFilename: "{app}\images\desktop-main-icon.ico"; IconIndex: 0; Tasks: InstallBusiness
 Name: "{userdesktop}\Απομακρυσμένη υποστήριξη - Λήψη"; Filename: "https://www.sbzsystems.com/el/apomakrismeni-ipostirixi/"; WorkingDir: "{app}"; IconFilename: "{app}\images\sbzhelp.ico"; Languages: Greek
 Name: "{userdesktop}\Remote support - Download"; Filename: "https://www.sbzsystems.com/remote-support/"; WorkingDir: "{app}"; IconFilename: "{app}\images\sbzhelp.ico"; Languages: English
 Name: "{userdesktop}\Ξεκινώντας με την EMDI – Οδηγίες χρήσης"; Filename: "https://www.sbzsystems.com/download/Getting_started_with_EMDI_gr.pdf"; WorkingDir: "{app}"; IconFilename: "{app}\images\help.ico"; Languages: Greek
 Name: "{userdesktop}\Getting started with EMDI - Manual"; Filename: "https://www.sbzsystems.com/download/Getting_started_with_EMDI_uk.pdf"; WorkingDir: "{app}"; IconFilename: "{app}\images\help.ico"; Languages: English
-Name: "{group}\EMDI {cm:RetailPOSName} επιλογές"; Filename: "{app}\epiloges.exe"; WorkingDir: "{app}"; IconFilename: "{app}\images\desktop-main-icon.ico"; IconIndex: 0; Languages: Greek
-Name: "{group}\EMDI {cm:RetailPOSName} υποστήριξη"; Filename: "https://www.sbzsystems.com/el/emdi-ipostirixi/"; WorkingDir: "{app}"; Languages: Greek
-Name: "{group}\Απομακρυσμένη υποστήριξη"; Filename: "https://www.sbzsystems.com/el/apomakrismeni-ipostirixi/"; WorkingDir: "{app}"; IconFilename: "{app}\images\sbzhelp.ico"; Languages: Greek
+Name: "{group}\EMDI {cm:RetailPOSName} επιλογές"; Filename: "{app}\epiloges.exe"; WorkingDir: "{app}"; IconFilename: "{app}\images\desktop-main-icon.ico"; IconIndex: 0; Languages: Greek; Tasks: InstallRetail
+Name: "{group}\EMDI {cm:RestaurantName} επιλογές"; Filename: "{app}\epiloges.exe"; WorkingDir: "{app}"; IconFilename: "{app}\images\desktop-main-icon.ico"; IconIndex: 0; Languages: Greek; Tasks: InstallRestaurant
+Name: "{group}\EMDI {cm:BusinessManagementType} επιλογές"; Filename: "{app}\epiloges.exe"; WorkingDir: "{app}"; IconFilename: "{app}\images\desktop-main-icon.ico"; IconIndex: 0; Languages: Greek; Tasks: InstallBusiness
+Name: "{group}\EMDI {cm:RetailPOSName} υποστήριξη"; Filename: "https://www.sbzsystems.com/el/emdi-ipostirixi/"; WorkingDir: "{app}"; Languages: Greek; Tasks: InstallRetail
+Name: "{group}\EMDI {cm:RestaurantName} υποστήριξη"; Filename: "https://www.sbzsystems.com/el/emdi-ipostirixi/"; WorkingDir: "{app}"; Languages: Greek; Tasks: InstallRestaurant
+Name: "{group}\EMDI {cm:BusinessManagementType} υποστήριξη"; Filename: "https://www.sbzsystems.com/el/emdi-ipostirixi/"; WorkingDir: "{app}"; Languages: Greek; Tasks: InstallBusiness
+Name: "{group}\Ξεκινώντας με την EMDI – Οδηγίες χρήσης"; Filename: "https://www.sbzsystems.com/download/Getting_started_with_EMDI_gr.pdf"; WorkingDir: "{app}"; IconFilename: "{app}\images\help.ico"; Languages: Greek
+Name: "{group}\Απομακρυσμένη υποστήριξη"; Filename: "https://www.sbzsystems.com/el/apomakrismeni-ipostirixi/"; WorkingDir: "{app}"; IconFilename: "{app}\images\sbzhelp.ico"; Lan[...]
 Name: "{group}\Αντίγραφο ασφαλείας"; Filename: "{app}\ryumiseis.exe"; WorkingDir: "{app}"; IconFilename: "{app}\ryumiseis.exe"; IconIndex: 0; Parameters: "b"; Languages: Greek
 Name: "{group}\Άδεια χρήσης"; Filename: "{app}\LICENCE-Greek.TXT"; WorkingDir: "{app}"; Languages: Greek
-Name: "{group}\Ξεκινώντας με την EMDI – Οδηγίες χρήσης"; Filename: "https://www.sbzsystems.com/download/Getting_started_with_EMDI_gr.pdf"; WorkingDir: "{app}"; IconFilename: "{app}\images\help.ico"; Languages: Greek
-Name: "{group}\EMDI {cm:RetailPOSName} main menu"; Filename: "{app}\epiloges.exe"; WorkingDir: "{app}"; IconFilename: "{app}\epiloges.exe"; IconIndex: 0; Languages: English
-Name: "{group}\EMDI {cm:RetailPOSName} help"; Filename: "https://www.sbzsystems.com/emdi-support/"; WorkingDir: "{app}"; IconFilename: "{app}\epiloges.exe"; Languages: English
+Name: "{group}\EMDI {cm:RetailPOSName} main menu"; Filename: "{app}\epiloges.exe"; WorkingDir: "{app}"; IconFilename: "{app}\epiloges.exe"; IconIndex: 0; Languages: English; Tasks: InstallRetail
+Name: "{group}\EMDI {cm:RestaurantName} main menu"; Filename: "{app}\epiloges.exe"; WorkingDir: "{app}"; IconFilename: "{app}\epiloges.exe"; IconIndex: 0; Languages: English; Tasks: InstallRestaurant
+Name: "{group}\EMDI {cm:BusinessManagementType} main menu"; Filename: "{app}\epiloges.exe"; WorkingDir: "{app}"; IconFilename: "{app}\epiloges.exe"; IconIndex: 0; Languages: English; Tasks: InstallBusiness
+Name: "{group}\EMDI {cm:RetailPOSName} help"; Filename: "https://www.sbzsystems.com/emdi-support/"; WorkingDir: "{app}"; IconFilename: "{app}\epiloges.exe"; Languages: English; Tasks: InstallRetail
+Name: "{group}\EMDI {cm:RestaurantName} help"; Filename: "https://www.sbzsystems.com/emdi-support/"; WorkingDir: "{app}"; IconFilename: "{app}\epiloges.exe"; Languages: English; Tasks: InstallRestaurant
+Name: "{group}\EMDI {cm:BusinessManagementType} help"; Filename: "https://www.sbzsystems.com/emdi-support/"; WorkingDir: "{app}"; IconFilename: "{app}\epiloges.exe"; Languages: English; Tasks: InstallBusiness
+Name: "{group}\Getting started with EMDI - Manual"; Filename: "https://www.sbzsystems.com/download/Getting_started_with_EMDI_uk.pdf"; WorkingDir: "{app}"; IconFilename: "{app}\images\help.ico"; Langua[...]
 Name: "{group}\Remote support"; Filename: "https://www.sbzsystems.com/remote-support/"; WorkingDir: "{app}"; IconFilename: "{app}\images\sbzhelp.ico"; Languages: English
 Name: "{group}\Backup"; Filename: "{app}\ryumiseis.exe"; WorkingDir: "{app}"; IconFilename: "{app}\ryumiseis.exe"; IconIndex: 0; Parameters: "b"; Languages: English
 Name: "{group}\Licensing"; Filename: "{app}\LICENCE-English.TXT"; WorkingDir: "{app}"; Languages: English
-Name: "{group}\Getting started with EMDI - Manual"; Filename: "https://www.sbzsystems.com/download/Getting_started_with_EMDI_uk.pdf"; WorkingDir: "{app}"; IconFilename: "{app}\images\help.ico"; Languages: English
 
 [Run]
 ;*** Common Run Entries ***
-Filename: "{%TEMP}\Firebird.exe"; Parameters: "/SILENT"; Flags: skipifsilent; Tasks: normal_database,normal_database_Retail
+Filename: "{%TEMP}\Firebird.exe"; Parameters: "/SILENT"; Flags: skipifsilent; Tasks: normal_database,normal_database_Retail, normal_database_Restaurant
 Filename: "{app}\epiloges.exe"; WorkingDir: "{app}"; Flags: nowait postinstall skipifsilent
 
-;*** EMDI Specific Run Entries ***
-Filename: "https://www.sbzsystems.com/download/success.php?lang=el&app=erp"; Flags: postinstall shellexec runasoriginaluser skipifsilent; Languages: Greek; Tasks: InstallEMDI
-Filename: "https://www.sbzsystems.com/download/success.php?lang=en&app=erp"; Flags: postinstall shellexec runasoriginaluser skipifsilent; Languages: English; Tasks: InstallEMDI
+;*** EMDI Business Specific Run Entries ***
+Filename: "https://www.sbzsystems.com/download/success.php?lang=el&app=erp"; Flags: postinstall shellexec runasoriginaluser skipifsilent; Languages: Greek; Tasks: InstallBusiness
+Filename: "https://www.sbzsystems.com/download/success.php?lang=en&app=erp"; Flags: postinstall shellexec runasoriginaluser skipifsilent; Languages: English; Tasks: InstallBusiness
 
 ;*** EMDI Retail POS Specific Run Entries ***
-Filename: "https://www.sbzsystems.com/download/success.php?lang=el&app=retailpos"; Flags: postinstall shellexec runasoriginaluser skipifsilent; Languages: Greek; Tasks: InstallRetailPOS
-Filename: "https://www.sbzsystems.com/download/success.php?lang=en&app=retailpos"; Flags: postinstall shellexec runasoriginaluser skipifsilent; Languages: English; Tasks: InstallRetailPOS
+Filename: "https://www.sbzsystems.com/download/success.php?lang=el&app=retailpos"; Flags: postinstall shellexec runasoriginaluser skipifsilent; Languages: Greek; Tasks: InstallRetail
+Filename: "https://www.sbzsystems.com/download/success.php?lang=en&app=retailpos"; Flags: postinstall shellexec runasoriginaluser skipifsilent; Languages: English; Tasks: InstallRetail
+
+;*** EMDI Restaurant Specific Run Entries ***
+Filename: "https://www.sbzsystems.com/download/success.php?lang=el&app=restaurant"; Flags: postinstall shellexec runasoriginaluser skipifsilent; Languages: Greek; Tasks: InstallRestaurant
+Filename: "https://www.sbzsystems.com/download/success.php?lang=en&app=restaurant"; Flags: postinstall shellexec runasoriginaluser skipifsilent; Languages: English; Tasks: InstallRestaurant
 
 [UninstallDelete]
 Type: files; Name: "{app}\settings.ini"
@@ -543,18 +565,18 @@ Type: files; Name: "{app}\language\mydata\fhm_vat_en.csv"
 Type: files; Name: "{app}\language\mydata\fhm_vat_el.csv"
 Type: files; Name: "{app}\language\mydata\fhm_docs_en.csv"
 Type: files; Name: "{app}\language\mydata\fhm_docs_el.csv"
-Type: files; Name: "{app}\intl\fbintl.dll"; Tasks: normal_database,normal_database_Retail
-Type: files; Name: "{app}\intl\fbintl.conf"; Tasks: normal_database,normal_database_Retail
-Type: files; Name: "{app}\plugins\engine12.dll"; Tasks: normal_database,normal_database_Retail
-Type: files; Name: "{app}\ib_util.dll"; Tasks: normal_database,normal_database_Retail
-Type: files; Name: "{app}\fbclient.dll"; Tasks: normal_database,normal_database_Retail
-Type: files; Name: "{app}\icudt52l.dat"; Tasks: normal_database,normal_database_Retail
-Type: files; Name: "{app}\icudt52.dll"; Tasks: normal_database,normal_database_Retail
-Type: files; Name: "{app}\icuin52.dll"; Tasks: normal_database,normal_database_Retail
-Type: files; Name: "{app}\icuuc52.dll"; Tasks: normal_database,normal_database_Retail
-Type: files; Name: "{app}\gfix.exe"; Tasks: normal_database,normal_database_Retail
-Type: files; Name: "{app}\gbak.exe"; Tasks: normal_database,normal_database_Retail
-Type: files; Name: "{app}\firebird.conf"; Tasks: normal_database,normal_database_Retail
+Type: files; Name: "{app}\intl\fbintl.dll"; Tasks: normal_database,normal_database_Retail, normal_database_Restaurant
+Type: files; Name: "{app}\intl\fbintl.conf"; Tasks: normal_database,normal_database_Retail, normal_database_Restaurant
+Type: files; Name: "{app}\plugins\engine12.dll"; Tasks: normal_database,normal_database_Retail, normal_database_Restaurant
+Type: files; Name: "{app}\ib_util.dll"; Tasks: normal_database,normal_database_Retail, normal_database_Restaurant
+Type: files; Name: "{app}\fbclient.dll"; Tasks: normal_database,normal_database_Retail, normal_database_Restaurant
+Type: files; Name: "{app}\icudt52l.dat"; Tasks: normal_database,normal_database_Retail, normal_database_Restaurant
+Type: files; Name: "{app}\icudt52.dll"; Tasks: normal_database,normal_database_Retail, normal_database_Restaurant
+Type: files; Name: "{app}\icuin52.dll"; Tasks: normal_database,normal_database_Retail, normal_database_Restaurant
+Type: files; Name: "{app}\icuuc52.dll"; Tasks: normal_database,normal_database_Retail, normal_database_Restaurant
+Type: files; Name: "{app}\gfix.exe"; Tasks: normal_database,normal_database_Retail, normal_database_Restaurant
+Type: files; Name: "{app}\gbak.exe"; Tasks: normal_database,normal_database_Retail, normal_database_Restaurant
+Type: files; Name: "{app}\firebird.conf"; Tasks: normal_database,normal_database_Retail, normal_database_Restaurant
 
 [InnoIDE_Settings]
 LogFileOverwrite=false
@@ -566,10 +588,10 @@ CompileLogMethod=append
 
 [Registry]
 ;*** Common Registry Entries ***
-Root: "HKCU32"; Subkey: "SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION"; ValueType: dword; ValueName: "pvlhseis.exe"; ValueData: "11000"; Flags: createvalueifdoesntexist
-Root: "HKCU32"; Subkey: "SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION"; ValueType: dword; ValueName: "pelatologio.exe"; ValueData: "11000"; Flags: createvalueifdoesntexist
-Root: "HKCU32"; Subkey: "SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION"; ValueType: dword; ValueName: "epiloges.exe"; ValueData: "11000"; Flags: createvalueifdoesntexist
-Root: "HKCU32"; Subkey: "SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION"; ValueType: dword; ValueName: "customer_display.exe"; ValueData: "11000"; Flags: createvalueifdoesntexist
+Root: "HKCU32"; Subkey: "SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION"; ValueType: dword; ValueName: "pvlhseis.exe"; Flags: createvalueifdoesntexist
+Root: "HKCU32"; Subkey: "SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION"; ValueType: dword; ValueName: "pelatologio.exe"; Flags: createvalueifdo[...]
+Root: "HKCU32"; Subkey: "SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION"; ValueType: dword; ValueName: "epiloges.exe"; Flags: createvalueifdoesn[...]
+Root: "HKCU32"; Subkey: "SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION"; ValueType: dword; ValueName: "customer_display.exe"; Flags: createvalueifdoesn[...]
 
 [INI]
 ;*** Common INI Entries ***
@@ -577,33 +599,35 @@ Filename: "{app}\personal\{username}\settings.ini"; Section: "General"; Key: "th
 Filename: "{app}\settings.ini"; Section: "DB"; Key: "path"; String: "{app}\dbs\main.fdb"; Flags: createkeyifdoesntexist
 Filename: "{app}\settings.ini"; Section: "General"; Key: "language"; String: "el"; Flags: createkeyifdoesntexist; Languages: Greek
 Filename: "{app}\settings.ini"; Section: "General"; Key: "language"; String: "en"; Flags: createkeyifdoesntexist; Languages: English
-Filename: "{app}\settings.ini"; Section: "DB"; Key: "host"; String: ""; Tasks: embedded_database,embedded_database_Retail
-Filename: "{app}\settings.ini"; Section: "DB"; Key: "library"; String: "{app}\fbclient.dll"; Flags: createkeyifdoesntexist; Tasks: embedded_database,embedded_database_Retail
-Filename: "{app}\settings.ini"; Section: "DB"; Key: "library"; String: ""; Flags: createkeyifdoesntexist; Tasks: normal_database,normal_database_Retail
-Filename: "{app}\settings.ini"; Section: "syncDB"; Key: "host"; String: ""; Tasks: embedded_database,embedded_database_Retail
-Filename: "{app}\settings.ini"; Section: "syncDB"; Key: "library"; String: "{app}\fbclient.dll"; Flags: createkeyifdoesntexist; Tasks: embedded_database,embedded_database_Retail
-Filename: "{app}\settings.ini"; Section: "syncDB"; Key: "library"; String: ""; Flags: createkeyifdoesntexist; Tasks: normal_database,normal_database_Retail
+Filename: "{app}\settings.ini"; Section: "DB"; Key: "host"; String: ""; Tasks: embedded_database,embedded_database_Retail, embedded_database_Restaurant
+Filename: "{app}\settings.ini"; Section: "DB"; Key: "library"; String: "{app}\fbclient.dll"; Flags: createkeyifdoesntexist; Tasks: embedded_database,embedded_database_Retail, embedded_database_Restaurant
+Filename: "{app}\settings.ini"; Section: "DB"; Key: "library"; String: ""; Flags: createkeyifdoesntexist; Tasks: normal_database,normal_database_Retail, normal_database_Restaurant
+Filename: "{app}\settings.ini"; Section: "syncDB"; Key: "host"; String: ""; Tasks: embedded_database,embedded_database_Retail, embedded_database_Restaurant
+Filename: "{app}\settings.ini"; Section: "syncDB"; Key: "library"; String: "{app}\fbclient.dll"; Flags: createkeyifdoesntexist; Tasks: embedded_database,embedded_database_Retail, embedded_database_Restaurant
+Filename: "{app}\settings.ini"; Section: "syncDB"; Key: "library"; String: ""; Flags: createkeyifdoesntexist; Tasks: normal_database,normal_database_Retail, normal_database_Restaurant
 Filename: "{app}\settings.ini"; Section: "Form"; Key: "country"; String: "GR"; Flags: createkeyifdoesntexist; Languages: Greek
 
 ;*** EMDI Specific INI Entries ***
-Filename: "{app}\settings.ini"; Section: "General"; Key: "updateurl"; String: "www.sbzsystems.com/download/emdi.htm"; Tasks: InstallEMDI
+Filename: "{app}\settings.ini"; Section: "General"; Key: "updateurl"; String: "www.sbzsystems.com/download/emdi.htm"; Tasks: InstallBusiness
 
 ;*** EMDI Retail POS Specific INI Entries ***
-Filename: "{app}\settings.ini"; Section: "General"; Key: "updateurl"; String: "www.sbzsystems.com/download/emdi_retail_pos.htm"; Tasks: InstallRetailPOS
+Filename: "{app}\settings.ini"; Section: "General"; Key: "updateurl"; String: "www.sbzsystems.com/download/emdi_retail_pos.htm"; Tasks: InstallRetail
 
-[Dirs]
-Name: "{app}";  Permissions: authusers-full
+;*** EMDI Restaurant Specific INI Entries ***
+Filename: "{app}\settings.ini"; Section: "General"; Key: "updateurl"; String: "www.sbzsystems.com/download/emdi_restaurant.htm"; Tasks: InstallRestaurant
+Filename: "{app}\settings.ini"; Section: "General"; Key: "theme"; String: "Darker"; Tasks: InstallRestaurant
 
 [Code]
 /////////////////////////////////////////////////////////////////////
 var run_upgrade,ok_upgrade,fmunotexistv:boolean;
     MyProgChecked: Boolean;
     MyProgCheckResult: Boolean;
+    InstallTypePage: TInputQueryWizardPage;
 
 function MyProgCheck(): Boolean;
 begin
   if not MyProgChecked then begin
-    MyProgCheckResult := not DirExists(ExpandConstant('{app}\personal'));
+    MyProgCheckResult := not DirExists(ExpandConstant('{app}\personal'));    
     MyProgChecked := True;
   end;
   Result := MyProgCheckResult;
@@ -712,16 +736,16 @@ ShellExec('open','tskill.exe',' "efoodconnector"','',SW_HIDE,ewNoWait,ErrorCode)
 
 end;
 
-// ΕΥΡΕΣΗ ΤΡΕΧΟΥΣΑΣ ΕΚΔΟΣΗΣ ΓΙΑ ΣΥΓΚΡΙΣΗ ΩΣΤΕ ΝΑ ΒΓΕΙ ΜΗΝΥΜΑ
-ok_upgrade:=false;
-if not WizardSilent then
+  // ΕΥΡΕΣΗ ΤΡΕΧΟΥΣΑΣ ΕΚΔΟΣΗΣ ΓΙΑ ΣΥΓΚΡΙΣΗ ΩΣΤΕ ΝΑ ΒΓΕΙ ΜΗΝΥΜΑ
+  ok_upgrade:=false;
+  if not WizardSilent then
   if RegValueExists(HKEY_LOCAL_MACHINE,GetHKLM, 'DisplayVersion') then begin
 
-          RegQueryStringValue(HKEY_LOCAL_MACHINE,GetHKLM, 'DisplayVersion', Version);
-          MsgBox(ExpandConstant('{cm:NewerVersionExists} '+Version), mbInformation, MB_OK);
-
+      RegQueryStringValue(HKEY_LOCAL_MACHINE,GetHKLM, 'DisplayVersion', Version);
+      MsgBox(ExpandConstant('{cm:NewerVersionExists} '+Version), mbInformation, MB_OK);
+      
   end else begin
-
+      
   end;
 
 Result := True;
@@ -812,6 +836,16 @@ begin
     PrintButton.Top := WizardForm.InfoAfterPage.Height + 88;
     PrintButton.OnClick := @PrintButtonClick;
     PrintButton.Parent := WizardForm.NextButton.Parent;
+
+    // Create the install type selection page
+    InstallTypePage := TInputQueryWizardPage.Create(WizardForm);
+    InstallTypePage.Name := 'InstallTypePage';
+    InstallTypePage.DisplayName := ExpandConstant('{cm:InstallType}');
+    InstallTypePage.Title := ExpandConstant('{cm:InstallType}');
+    InstallTypePage.Description := ExpandConstant('{cm:InstallType}');
+    InstallTypePage.AddRadioButton(ExpandConstant('{cm:Business}'), 1, true);
+    InstallTypePage.AddRadioButton(ExpandConstant('{cm:Retail}'), 2, false);
+    InstallTypePage.AddRadioButton(ExpandConstant('{cm:Restaurant}'), 3, false);
 end;
 
 procedure CurPageChanged(CurPage: Integer);
@@ -820,4 +854,29 @@ begin
 
    if CurPage = wpFinished then
     WizardForm.RunList.Visible := False;
+
+    if CurPage = wpSelectTasks then
+    begin
+        //Based on selected install type, enable/disable tasks accordingly
+        if InstallTypePage.Values[0] = '1' then //Business
+        begin
+            WizardForm.TasksList.Checked[WizardForm.TasksList.FindTask('InstallBusiness')] := True;
+        end else if InstallTypePage.Values[0] = '2' then //Retail
+        begin
+            WizardForm.TasksList.Checked[WizardForm.TasksList.FindTask('InstallRetail')] := True;
+        end else if InstallTypePage.Values[0] = '3' then //Restaurant
+        begin
+            WizardForm.TasksList.Checked[WizardForm.TasksList.FindTask('InstallRestaurant')] := True;
+        end;
+    end;
+end;
+
+function NextButtonClick(CurPageID: Integer): Boolean;
+begin
+    Result := True;
+    if CurPageID = wpWelcome then
+    begin
+        WizardForm.ActivePageIndex := InstallTypePage.PageIndex;
+        Result := False;
+    end;
 end;

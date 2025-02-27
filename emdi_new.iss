@@ -17,7 +17,7 @@ DefaultDirName={pf}\SBZ systems\{cm:DefaultDirName}\
 UsePreviousAppDir=true
 WizardImageFile=images\emdisetup-met.bmp
 ShowLanguageDialog=yes
-OutputBaseFilename={cm:OutputBaseFilename}
+OutputBaseFilename=emdi
 InfoAfterFile=
 InfoBeforeFile=
 VersionInfoCompany=SBZ systems
@@ -85,8 +85,6 @@ Greek.DefaultGroupName=
 English.DefaultGroupName=
 Greek.VersionInfoDescription=EMDI
 English.VersionInfoDescription=EMDI
-Greek.OutputBaseFilename=emdi
-English.OutputBaseFilename=emdi
 Greek.AppID={34DA3E25-64A3-4BD2-96DF-E9A0F0AE2DE1}
 English.AppID={34DA3E25-64A3-4BD2-96DF-E9A0F0AE2DE1}
 Greek.ProductName=EMDI Business
@@ -172,39 +170,39 @@ Name: InstallHotel; Description: {cm:Hotel} {cm:HotelName}; GroupDescription: {c
 Name: InstallFitness; Description: {cm:Fitness} {cm:FitnessName}; GroupDescription: {cm:InstallType}; Flags: exclusive unchecked
 
 ;*** Common Tasks ***
-Name: sync; Description: {cm:SyncDatabases}; Flags: unchecked; Group: OptionalTasks;
-Name: stock; Description: {cm:MobileInventoryManagement}; Flags: unchecked;  Group: OptionalTasks;
-Name: display; Description: {cm:CustomerDisplay}; Flags: unchecked; Group: OptionalTasks;
-Name: spos; Description: {cm:RS232DeviceConnector}; Flags: unchecked; Group: OptionalTasks;
+Name: sync; Description: {cm:SyncDatabases}; Flags: unchecked; Components: OptionalTasks;
+Name: stock; Description: {cm:MobileInventoryManagement}; Flags: unchecked;  Components: OptionalTasks;
+Name: display; Description: {cm:CustomerDisplay}; Flags: unchecked; Components: OptionalTasks;
+Name: spos; Description: {cm:RS232DeviceConnector}; Flags: unchecked; Components: OptionalTasks;
 
 ;*** EMDI Specific Tasks ***
-Name: gas; Description: {cm:FuelInflowsOutflowsConnection}; Flags: unchecked; Group: EMDI_Tasks; OnlyBelowVersion: 6.0; Group: OptionalTasks; Tasks: InstallBusiness
-Name: sqlserver; Description: {cm:EshopSQLServerConnection}; Flags: unchecked; Group: EMDI_Tasks; OnlyBelowVersion: 6.0; Group: OptionalTasks; Tasks: InstallBusiness
-Name: eshop; Description: {cm:EshopBridgeConnection}; Flags: unchecked; Group: EMDI_Tasks; OnlyBelowVersion: 6.0; Group: OptionalTasks; Tasks: InstallBusiness
-Name: Embedded_database; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Group: DB; OnlyBelowVersion: 6.0; Tasks: InstallBusiness
-Name: normal_database; Description: {cm:Normal}; GroupDescription: {cm:Database}; Flags: exclusive unchecked; Group: DB; OnlyBelowVersion: 6.0; Tasks: InstallBusiness
+Name: gas; Description: {cm:FuelInflowsOutflowsConnection}; Flags: unchecked; Components: EMDI_Tasks; OnlyBelowVersion: 6.0; Components: OptionalTasks; Tasks: InstallBusiness
+Name: sqlserver; Description: {cm:EshopSQLServerConnection}; Flags: unchecked; Components: EMDI_Tasks; OnlyBelowVersion: 6.0; Components: OptionalTasks; Tasks: InstallBusiness
+Name: eshop; Description: {cm:EshopBridgeConnection}; Flags: unchecked; Components: EMDI_Tasks; OnlyBelowVersion: 6.0; Components: OptionalTasks; Tasks: InstallBusiness
+Name: Embedded_database; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Components: DB; OnlyBelowVersion: 6.0; Tasks: InstallBusiness
+Name: normal_database; Description: {cm:Normal}; GroupDescription: {cm:Database}; Flags: exclusive unchecked; Components: DB; OnlyBelowVersion: 6.0; Tasks: InstallBusiness
 
 ;*** EMDI Retail POS Specific Tasks ***
-Name: tcpsync; Description: {cm:CommunicationMaintenance}; Flags: unchecked; Group: Retail_Tasks; OnlyBelowVersion: 6.0; Group: OptionalTasks; Tasks: InstallRetail
-Name: Embedded_database_Retail; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Group: DB_Retail; OnlyBelowVersion: 6.0; Tasks: InstallRetail
-Name: normal_database_Retail; Description: {cm:Normal}; GroupDescription: {cm:Database}; Flags: exclusive unchecked; Group: DB_Retail; OnlyBelowVersion: 6.0; Tasks: InstallRetail
+Name: tcpsync; Description: {cm:CommunicationMaintenance}; Flags: unchecked; Components: Retail_Tasks; OnlyBelowVersion: 6.0; Components: OptionalTasks; Tasks: InstallRetail
+Name: Embedded_database_Retail; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Components: DB_Retail; OnlyBelowVersion: 6.0; Tasks: InstallRetail
+Name: normal_database_Retail; Description: {cm:Normal}; GroupDescription: {cm:Database}; Flags: exclusive unchecked; Components: DB_Retail; OnlyBelowVersion: 6.0; Tasks: InstallRetail
 
 ;*** EMDI Restaurant Specific Tasks ***
-Name: efood; Description: {cm:DeliveryServiceConnection}; Flags: unchecked; Group: Restaurant_Tasks; OnlyBelowVersion: 6.0; Group: OptionalTasks; Tasks: InstallRestaurant
-Name: Embedded_database_Restaurant; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Group: DB_Restaurant; OnlyBelowVersion: 6.0; Tasks: InstallRestaurant
-Name: normal_database_Restaurant; Description: {cm:Normal}; GroupDescription: {cm:Database}; Flags: exclusive unchecked; Group: DB_Restaurant; OnlyBelowVersion: 6.0; Tasks: InstallRestaurant
+Name: efood; Description: {cm:DeliveryServiceConnection}; Flags: unchecked; Components: Restaurant_Tasks; OnlyBelowVersion: 6.0; Components: OptionalTasks; Tasks: InstallRestaurant
+Name: Embedded_database_Restaurant; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Components: DB_Restaurant; OnlyBelowVersion: 6.0; Tasks: InstallRestaurant
+Name: normal_database_Restaurant; Description: {cm:Normal}; GroupDescription: {cm:Database}; Flags: exclusive unchecked; Components: DB_Restaurant; OnlyBelowVersion: 6.0; Tasks: InstallRestaurant
 
 ;*** EMDI Park Specific Tasks ***
-Name: Embedded_database_Park; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Group: DB_Park; OnlyBelowVersion: 6.0; Tasks: InstallPark
-Name: normal_database_Park; Description: {cm:Normal}; GroupDescription: {cm:Database}; Flags: exclusive unchecked; Group: DB_Park; OnlyBelowVersion: 6.0; Tasks: InstallPark
+Name: Embedded_database_Park; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Components: DB_Park; OnlyBelowVersion: 6.0; Tasks: InstallPark
+Name: normal_database_Park; Description: {cm:Normal}; GroupDescription: {cm:Database}; Flags: exclusive unchecked; Components: DB_Park; OnlyBelowVersion: 6.0; Tasks: InstallPark
 
 ;*** EMDI Hotel Specific Tasks ***
-Name: Embedded_database_Hotel; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Group: DB_Hotel; OnlyBelowVersion: 6.0; Tasks: InstallHotel
-Name: normal_database_Hotel; Description: {cm:Normal}; GroupDescription: {cm:Database}; Flags: exclusive unchecked; Group: DB_Hotel; OnlyBelowVersion: 6.0; Tasks: InstallHotel
+Name: Embedded_database_Hotel; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Components: DB_Hotel; OnlyBelowVersion: 6.0; Tasks: InstallHotel
+Name: normal_database_Hotel; Description: {cm:Normal}; GroupDescription: {cm:Database}; Flags: exclusive unchecked; Components: DB_Hotel; OnlyBelowVersion: 6.0; Tasks: InstallHotel
 
 ;*** EMDI Fitness Specific Tasks ***
-Name: Embedded_database_Fitness; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Group: DB_Fitness; OnlyBelowVersion: 6.0; Tasks: InstallFitness
-Name: normal_database_Fitness; Description: {cm:Normal}; GroupDescription: {cm:Database}; Flags: exclusive unchecked; Group: DB_Fitness; OnlyBelowVersion: 6.0; Tasks: InstallFitness
+Name: Embedded_database_Fitness; Description: {cm:Embedded}; GroupDescription: {cm:Database}; Flags: exclusive; Components: DB_Fitness; OnlyBelowVersion: 6.0; Tasks: InstallFitness
+Name: normal_database_Fitness; Description: {cm:Normal}; GroupDescription: {cm:Database}; Flags: exclusive unchecked; Components: DB_Fitness; OnlyBelowVersion: 6.0; Tasks: InstallFitness
 
 [CustomMessages]
 ;*** Task Name Messages ***

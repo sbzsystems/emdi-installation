@@ -1,10 +1,10 @@
 # EMDI Installation Script
 
-This repository contains an Inno Setup script (`emdi_new.iss`) designed to automate the installation process for the EMDI application.
+This repository contains an Inno Setup script (`emdi_new.iss`) designed to automate the installation process for the EMDI windows application.
 
 ## Features
 
-- Simplifies the EMDI installation process.
+- Automates the EMDI installation process.
 - Ensures consistent setup configurations.
 - Provides a user-friendly installation experience.
 

@@ -1,4 +1,4 @@
-﻿#define ApplicationVersion GetFileVersion('epiloges.exe')
+#define ApplicationVersion GetFileVersion('epiloges.exe')
 
 [Files]
 Source: "images\desktop-main-icon.ico"; DestDir: "{app}\images"; Flags: ignoreversion
@@ -47,15 +47,26 @@ Source: "view\firebird.conf"; DestDir: "{app}"; Flags: ignoreversion; Tasks: emb
 Source: "..\..\Program Files (x86)\Firebird\Firebird_3_0\icudt52l.dat"; DestDir: "{app}"; Flags: ignoreversion; Tasks: embedded_database
 
 Source: "upgrade\dbupgrade.exe"; DestDir: "{app}\upgrade"; Flags: ignoreversion
-Source: "upgrade\innoextract.exe"; DestDir: "{app}\upgrade"; Flags: ignoreversion
+Source: "upgrade\dbupgrade.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "upgrade\sqlupgrade.sql"; DestDir: "{app}\upgrade"; Flags: ignoreversion
+Source: "upgrade\sqlupgrade.sql"; DestDir: "{app}"; Flags: ignoreversion
+
+Source: "upgrade\innoextract.exe"; DestDir: "{app}\upgrade"; Flags: ignoreversion
 Source: "upgrade\sqlupgrade8_12.sql"; DestDir: "{app}\upgrade"; Flags: ignoreversion
+
+
 
 Source: "forms\product.htm"; DestDir: "{app}\forms\"; Flags: onlyifdoesntexist
 Source: "forms\cashier.htm"; DestDir: "{app}\forms\"; Flags: onlyifdoesntexist
 Source: "forms\list_.txt"; DestDir: "{app}"; Flags: onlyifdoesntexist
 Source: "autocomplete.sql"; DestDir: "{app}"; Flags: ignoreversion
 Source: "audio\ok.wav"; DestDir: "{app}\audio\"; Flags: onlyifdoesntexist
+
+
+
+Source: "dbs\sbzapi_grammes.profile"; DestDir: "{app}\dbs"; DestName: "sbzapi_grammes.profile"; Flags: onlyifdoesntexist
+Source: "dbs\sbzapi_grammes.rules"; DestDir: "{app}\dbs"; DestName: "sbzapi_grammes.rules"; Flags: onlyifdoesntexist
+
 
 Source: "dbs\MAIN.FDB"; DestDir: "{app}\dbs"; DestName: "main.fdb"; Flags: onlyifdoesntexist; Components: erp_files; Languages: Greek
 Source: "dbs\MAINSM.FDB"; DestDir: "{app}\dbs"; DestName: "main.fdb"; Flags: onlyifdoesntexist; Components: retail_files; Languages: Greek
@@ -125,6 +136,7 @@ Source: "forms\templates\accounts_basic_el.fr3"; DestDir: "{app}\forms\templates
 Source: "forms\templates\accounts_analysis_el.fr3"; DestDir: "{app}\forms\templates\"; Flags: ignoreversion
 Source: "forms\templates\accounts_customers_el.fr3"; DestDir: "{app}\forms\templates\"; Flags: ignoreversion
 Source: "forms\templates\scale_data_el.fr3"; DestDir: "{app}\forms\templates\"; Flags: ignoreversion
+Source: "forms\templates\bookings_list_el.fr3"; DestDir: "{app}\forms\templates\"; Flags: ignoreversion
 
 Source: "forms\templates\calendar_appointment_en.fr3"; DestDir: "{app}\forms\templates\"; Flags: ignoreversion
 Source: "forms\templates\customers_barcode_en.fr3"; DestDir: "{app}\forms\templates\"; Flags: ignoreversion
@@ -146,6 +158,7 @@ Source: "forms\templates\accounts_basic_en.fr3"; DestDir: "{app}\forms\templates
 Source: "forms\templates\accounts_analysis_en.fr3"; DestDir: "{app}\forms\templates\"; Flags: ignoreversion
 Source: "forms\templates\accounts_customers_en.fr3"; DestDir: "{app}\forms\templates\"; Flags: ignoreversion
 Source: "forms\templates\scale_data_en.fr3"; DestDir: "{app}\forms\templates\"; Flags: ignoreversion
+Source: "forms\templates\bookings_list_en.fr3"; DestDir: "{app}\forms\templates\"; Flags: ignoreversion
 
 Source: "forms\label60x40.prn"; DestDir: "{app}\forms\"; Flags: ignoreversion
 Source: "forms\label.prn"; DestDir: "{app}\forms\"; Flags: ignoreversion
@@ -362,21 +375,25 @@ Source: "LICENCE-English.TXT"; DestDir: "{app}"; Flags: ignoreversion
 
 Source: "mobile\emdi_stock\emdi_stock.exe"; DestDir: "{app}\emdi_stock"; Flags: ignoreversion; Components: erp_files retail_files; Tasks: stock
 Source: "mobile\emdi_stock\templates\template.htm"; DestDir: "{app}\emdi_stock\templates"; Components: erp_files retail_files; Tasks: stock
-Source: "mobile\emdi_stock\wwwroot\images\background.jpg"; DestDir: "{app}\emdi_stock\wwwroot\images"; Components: erp_files retail_files; Tasks: stock
+Source: "mobile\emdi_stock\wwwroot\background.jpg"; DestDir: "{app}\emdi_stock\wwwroot"; Components: erp_files retail_files; Tasks: stock
 Source: "mobile\emdi_stock\wwwroot\css\template.css"; DestDir: "{app}\emdi_stock\wwwroot\css"; Components: erp_files retail_files; Tasks: stock
 Source: "mobile\emdi_stock\wwwroot\favicon.ico"; DestDir: "{app}\emdi_stock\wwwroot"; Flags: ignoreversion; Components: erp_files retail_files; Tasks: stock
 
 Source: "mobile\emdi_park\emdi_park.exe"; DestDir: "{app}\emdi_park"; Flags: ignoreversion; Components: parking_files
+Source: "mobile\emdi_park\templates\template.htm"; DestDir: "{app}\emdi_park\templates"; Components: parking_files
+Source: "mobile\emdi_park\wwwroot\css\template.css"; DestDir: "{app}\emdi_park\wwwroot\css"; Components: parking_files
+Source: "mobile\emdi_park\wwwroot\favicon.ico"; DestDir: "{app}\emdi_park\wwwroot"; Flags: ignoreversion; Components: parking_files
+
 Source: "mobile\emdi_park\ticket.txt"; DestDir: "{app}\emdi_park\"; DestName: "ticket.txt"; Flags: onlyifdoesntexist; Components: parking_files; Languages: Greek
 Source: "mobile\emdi_park\receipt.txt"; DestDir: "{app}\emdi_park\"; DestName: "receipt.txt"; Flags: onlyifdoesntexist; Components: parking_files; Languages: Greek
 Source: "mobile\emdi_park\ticket_en.txt"; DestDir: "{app}\emdi_park\"; DestName: "ticket.txt"; Flags: onlyifdoesntexist; Components: parking_files; Languages: English
 Source: "mobile\emdi_park\receipt_en.txt"; DestDir: "{app}\emdi_park\"; DestName: "receipt.txt"; Flags: onlyifdoesntexist; Components: parking_files; Languages: English
 
 Source: "mobile\emdi_activity\emdi_activity.exe"; DestDir: "{app}\emdi_activity"; Flags: ignoreversion; Components: fitness_files
-Source: "mobile\emdi_activity\wwwroot\background.jpg"; DestDir: "{app}\emdi_activity\wwwroot"; Flags: ignoreversion; Components: fitness_files
-
-; Source: "efoodconnector.exe"; DestDir: "{app}"; Flags: ignoreversion; Components: retail_files restaurant_files; Tasks: efood
-; Source: "dbs\CONNECTOR.FDB"; DestDir: "{app}\dbs"; Flags: ignoreversion; Components: retail_files restaurant_files; Tasks: efood
+Source: "mobile\emdi_activity\templates\template.htm"; DestDir: "{app}\emdi_activity\templates"; Components: fitness_files
+Source: "mobile\emdi_activity\wwwroot\background.jpg"; DestDir: "{app}\emdi_activity\wwwroot"; Components: fitness_files
+Source: "mobile\emdi_activity\wwwroot\css\template.css"; DestDir: "{app}\emdi_activity\wwwroot\css"; Components: fitness_files
+Source: "mobile\emdi_activity\wwwroot\favicon.ico"; DestDir: "{app}\emdi_activity\wwwroot"; Flags: ignoreversion; Components: fitness_files
 
 Source: "epiloges.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "apouhkh.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -404,7 +421,7 @@ Source: "..\spos\spos.exe"; DestDir: "{app}"; Flags: ignoreversion; Tasks: spos
 
 [Dirs]
 Name: "{app}";  Permissions: authusers-full
-Name: "{app}\logs"
+ 
 
 [Setup]
 AppCopyright=SBZ systems ©2003-2025
@@ -475,6 +492,9 @@ Name: "{userdesktop}\EMDI {cm:fitness}"; Filename: "{app}\epiloges.exe"; Working
 Name: "{userdesktop}\EMDI {cm:garage}"; Filename: "{app}\epiloges.exe"; WorkingDir: "{app}"; IconFilename: "{app}\images\desktop-main-icon.ico"; Components: garage_files
 Name: "{userdesktop}\EMDI {cm:erp}"; Filename: "{app}\epiloges.exe"; WorkingDir: "{app}"; IconFilename: "{app}\images\desktop-main-icon.ico"; Components: erp_files
 
+Name: "{app}\personal\{username}\emdi_park"; Filename: "{app}\emdi_park\emdi_park.exe"; WorkingDir: "{app}\emdi_park"; Components: parking_files; Languages: Greek
+Name: "{app}\personal\{username}\emdi_remote"; Filename: "{app}\pvlhseis.exe"; Parameters: "-1 -1 -1"; WorkingDir: "{app}\EmporikhSQL"; Components: parking_files; Languages: Greek
+
 [Languages]
 Name: "Greek"; MessagesFile: "C:\projects\EmporikhSQL\Greek.isl"; LicenseFile: "LICENCE-Greek.TXT"
 Name: "English"; MessagesFile: "C:\projects\EmporikhSQL\English.isl"; LicenseFile: "LICENCE-English.TXT"
@@ -499,16 +519,6 @@ Type: filesandordirs; Name: "{app}"
 
 [InstallDelete]
 Type: files; Name: "{%TEMP}\Firebird.exe"
-Type: files; Name: "{app}\forms\map_all.htm"
-Type: files; Name: "{app}\forms\map.htm"
-Type: files; Name: "{app}\language\mydata\AAHTList.csv"
-Type: files; Name: "{app}\language\mydata\cpv_codes.csv"
-Type: files; Name: "{app}\language\mydata\taric_codes.csv"
-Type: files; Name: "{app}\language\mydata\fhm_vat_en.csv"
-Type: files; Name: "{app}\language\mydata\fhm_vat_el.csv"
-Type: files; Name: "{app}\language\mydata\fhm_docs_en.csv"
-Type: files; Name: "{app}\language\mydata\fhm_docs_el.csv"
-
 Type: files; Name: "{app}\intl\fbintl.conf"; Tasks: normal_database
 Type: files; Name: "{app}\intl\fbintl.dll"; Tasks: normal_database
 Type: files; Name: "{app}\plugins\engine12.dll"; Tasks: normal_database
@@ -522,7 +532,10 @@ Type: files; Name: "{app}\gfix.exe"; Tasks: normal_database
 Type: files; Name: "{app}\gbak.exe"; Tasks: normal_database
 Type: files; Name: "{app}\firebird.conf"; Tasks: normal_database
 Type: files; Name: "{app}\zlib1.dll"; Tasks: normal_database
-Type: files; Name: "{app}\icuin52.dll"; Tasks: normal_database
+Type: files; Name: "{app}\msvcr100.dll"; Tasks: normal_database
+Type: files; Name: "{app}\send_email.dll"
+
+ 
 
 [InnoIDE_Settings]
 LogFileOverwrite=false
@@ -731,6 +744,27 @@ begin
    result:=fmunotexistv;
 end;
 
+ 
+
+/////////////////////////////////////////////////////////////////////
+// Refresh icons of all EXE files by invalidating shell icon cache
+procedure SHChangeNotify(wEventId, uFlags: Integer; dwItem1, dwItem2: Integer); external 'SHChangeNotify@shell32.dll stdcall';
+
+procedure RefreshExeFileIcons();
+var
+  shell: Variant;
+begin
+  try
+    shell := CreateOleObject('WScript.Shell');
+    // Use SHChangeNotify to refresh icons without killing Explorer
+    // SHCNE_ASSOCCHANGED (0x8000000) notifies shell of icon/association changes
+    SHChangeNotify($8000000, 0, 0, 0);
+    Sleep(500);
+  except
+    // Silently ignore errors
+  end;
+end;
+
 /////////////////////////////////////////////////////////////////////
 procedure CurStepChanged(CurStep: TSetupStep);
 var 
@@ -741,6 +775,12 @@ var
   if ok_upgrade and (CurStep=ssInstall) then run_upgrade:=true;
   if run_upgrade and (CurStep=ssPostInstall) then 
          Exec(ExpandConstant('{app}\upgrade\dbupgrade.exe'), '{app}\dbs\main.fdb', '', SW_SHOW, ewWaitUntilTerminated, ResultCode);
+  
+  // Refresh icons of all installed EXE files after installation
+  if (CurStep=ssPostInstall) then
+  begin
+    RefreshExeFileIcons();
+  end;
   
   if (CurStep=ssInstall) then begin
     fmunotexistv:=true;             
@@ -960,7 +1000,9 @@ begin
     erpButton.Caption := ExpandConstant('{cm:erp}');
     erpButton.Height := ScaleY(erpButton.Height);
     erpButton.width := 250;
-    erpButton.Checked := True;
+   // erpButton.Checked := True;
+    erpButton.Checked := (WizardForm.TypesCombo.ItemIndex = 0);
+
 
     retailButton := TNewRadioButton.Create(TypesPage);
     retailButton.Parent := TypesPage.Surface;
@@ -1029,8 +1071,11 @@ end;
  // Create custom "types" page with radio buttons
 function NextButtonClick(CurPageID: Integer): Boolean;
 begin
+
+
   // When leaving "types" page, update hidden "types" combo box according to user selection... }
-  if CurPageID = TypesPage.ID then
+  // if CurPageID = TypesPage.ID then
+   if (CurPageID = TypesPage.ID) and not WizardSilent then
   begin
     if erpButton.Checked then WizardForm.TypesCombo.ItemIndex := 0
       else 
